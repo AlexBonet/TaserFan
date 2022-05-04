@@ -57,7 +57,7 @@ public class Connector {
         return null;
     }
 
-    public <T> Result<T> post(Class<T> clazz, T data, String path) {
+    public <T> Result<T> post(Class<T> clazz, Object data, String path) {
         try {
             String url = API.Routes.URL + path;
             String jsonObject = conversor.toJson(data);
