@@ -44,9 +44,11 @@ public class Result<T> {
     // Error sub-class
     public final static class Error extends Result {
 
+        private int code;
         private String error;
 
-        public Error(String error) {
+        public Error(int code, String error) {
+            this.code = code;
             this.error = error;
         }
 
@@ -56,9 +58,14 @@ public class Result<T> {
         public void setError(String error) {
             this.error = error;
         }
-
         public String getError() {
             return this.error;
+        }
+        public int getCode() {
+            return code;
+        }
+        public void setCode(int code) {
+            this.code = code;
         }
     }
 }
