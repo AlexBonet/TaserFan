@@ -34,15 +34,15 @@ public class Connector {
     }
 
 
-    public <T> T get(Class<T> clazz, String path) {
-        String url = API.Routes.URL + path;
-        String jsonResponse = callMethodsObject.get(url);
-        if (jsonResponse != null)
-            return conversor.fromJson(jsonResponse, clazz);
-        return null;
-    }
+//    public <T> T get(Class<T> clazz, String path) {
+//        String url = API.Routes.URL + path;
+//        String jsonResponse = callMethodsObject.get(url);
+//        if (jsonResponse != null)
+//            return conversor.fromJson(jsonResponse, clazz);
+//        return null;
+//    }
 
-    public <T> Result<T> getResult(Class<T> clazz, String path) {
+    public <T> Result<T> get(Class<T> clazz, String path) {
         try {
             String url = API.Routes.URL + path;
             Response<ResponseBody> jsonResponse = callMethodsObject.getResult(url);
@@ -75,7 +75,7 @@ public class Connector {
         return null;
     }
 
-    public <T> Result<T> putResult(Class<T> clazz, T data, String path) {
+    public <T> Result<T> put(Class<T> clazz, T data, String path) {
         try {
             String url = API.Routes.URL + path;
             String jsonObject = conversor.toJson(data);
@@ -93,7 +93,7 @@ public class Connector {
         return null;
     }
 
-    public <T> Result<T> deleteResult(Class<T> clazz, String path) {
+    public <T> Result<T> delete(Class<T> clazz, String path) {
         try {
             String url = API.Routes.URL + path;
             Response<ResponseBody> jsonResponse = callMethodsObject.deleteResult(url);
