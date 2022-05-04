@@ -20,8 +20,7 @@ public class LoginActivity extends AppCompatActivity implements CallInterface {
     private EditText mail;
     private EditText pswd;
     private Button button;
-    private String email;
-    private String password;
+    private AuthenticateData ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +34,9 @@ public class LoginActivity extends AppCompatActivity implements CallInterface {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email = mail.getText().toString();
-                password = pswd.getText().toString();
+                String email = mail.getText().toString();
+                String password = pswd.getText().toString();
+                ad= new AuthenticateData(email,password);
             }
         });
 
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements CallInterface {
 
     @Override
     public void doInBackground() {
-        result= Connector.getConector().post(Empleado.class,new AuthenticateData(email,password),"/auth");
+        result= Connector.getConector().post(Empleado.class,ad,"/auth");
         Toast.makeText(LoginActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
 
     }
