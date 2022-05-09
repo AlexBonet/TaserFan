@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Basic Setting">
+        <ListPreference
+            android:dialogTitle="Tema"
+            android:entries="@array/settings_theme_entries"
+            android:entryValues="@array/settings_theme_values"
+            android:key="temas"
+            android:summary="Tema seleccionado: "
+            android:title="Tema" />
+    </PreferenceCategory>
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="ip"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="summaty IP"
+        android:title="Direccion IP del servidor" />
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="puerto"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="sumary puerto"
+        android:title="Puerto de acceso al servidor" />
+</PreferenceScreen>

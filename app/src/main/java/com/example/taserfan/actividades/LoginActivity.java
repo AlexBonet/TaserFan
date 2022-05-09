@@ -1,4 +1,4 @@
-package com.example.taserfan;
+package com.example.taserfan.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import com.example.taserfan.API.Connector;
 import com.example.taserfan.API.Result;
 import com.example.taserfan.Model.AuthenticateData;
 import com.example.taserfan.Model.Empleado;
-import com.example.taserfan.base.BaseActivity;
+import com.example.taserfan.R;
 import com.example.taserfan.base.CallInterface;
 
 public class LoginActivity extends AppCompatActivity implements CallInterface {
