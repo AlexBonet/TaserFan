@@ -18,12 +18,43 @@
         app:srcCompat="@drawable/ic_baseline_directions_car_24" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/matricula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="16dp"
+        android:text="MATRICULA"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/marca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MARCA"
+        app:layout_constraintBottom_toBottomOf="@+id/estado"
+        app:layout_constraintEnd_toStartOf="@+id/estado"
+        app:layout_constraintStart_toEndOf="@+id/img"
+        app:layout_constraintTop_toTopOf="@+id/estado" />
+
+    <TextView
+        android:id="@+id/estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ESTADO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/matricula"
+        app:layout_constraintStart_toStartOf="@+id/matricula"
+        app:layout_constraintTop_toBottomOf="@+id/matricula" />
+
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COLOR"
+        app:layout_constraintBottom_toBottomOf="@+id/estado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/estado"
+        app:layout_constraintTop_toTopOf="@+id/estado" />
 </androidx.constraintlayout.widget.ConstraintLayout>

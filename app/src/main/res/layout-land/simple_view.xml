@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img2"
+        android:layout_width="115dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_directions_car_24" />
+
+    <TextView
+        android:id="@+id/matricula2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="MATRICULA"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/marca2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="45dp"
+        android:text="MARCA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/matricula2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/estado2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="45dp"
+        android:text="ESTADO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/matricula2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/color2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COLOR"
+        app:layout_constraintBottom_toBottomOf="@+id/estado2"
+        app:layout_constraintEnd_toStartOf="@+id/bateria"
+        app:layout_constraintStart_toEndOf="@+id/estado2"
+        app:layout_constraintTop_toTopOf="@+id/estado2" />
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="DESCRIPCION"
+        app:layout_constraintBottom_toBottomOf="@+id/marca2"
+        app:layout_constraintStart_toEndOf="@+id/marca2"
+        app:layout_constraintTop_toTopOf="@+id/marca2" />
+
+    <TextView
+        android:id="@+id/precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PRECIOHORA"
+        app:layout_constraintBottom_toBottomOf="@+id/descripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/descripcion"
+        app:layout_constraintTop_toTopOf="@+id/descripcion" />
+
+    <TextView
+        android:id="@+id/bateria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BATERIA"
+        app:layout_constraintBottom_toBottomOf="@+id/color2"
+        app:layout_constraintStart_toStartOf="@+id/precio"
+        app:layout_constraintTop_toTopOf="@+id/color2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaserFan">
         <activity
+            android:name=".actividades.prefe.VistaExtendiad"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.RVActivity"
+            android:exported="false" />
+        <activity
             android:name=".actividades.prefe.PreferenciasActivity"
             android:exported="false" />
         <activity
@@ -27,7 +33,7 @@
         <activity
             android:name=".actividades.LoginActivity"
             android:exported="true"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
