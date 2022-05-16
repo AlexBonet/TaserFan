@@ -8,22 +8,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity {
+
+    private Button start, pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    public void onClick(View view) {
+        start = findViewById(R.id.button);
+        pref = findViewById(R.id.button2);
+
+        start.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(intent);
+        });
+
+        pref.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),PreferenciasActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     @Override
