@@ -1,4 +1,4 @@
-package com.example.taserfan.actividades.prefe;
+package com.example.taserfan.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
