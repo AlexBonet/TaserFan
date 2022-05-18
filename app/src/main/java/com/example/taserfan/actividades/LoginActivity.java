@@ -24,6 +24,7 @@ public class LoginActivity extends BaseActivity implements CallInterface {
     private Button button;
     private AuthenticateData ad;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +37,9 @@ public class LoginActivity extends BaseActivity implements CallInterface {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),RVActivity.class);
-                String email = mail.getText().toString();
-                String password = pswd.getText().toString();
-                ad= new AuthenticateData(email,password);
+
                 executeCall(LoginActivity.this);
-                startActivity(intent);
+
             }
         });
 
@@ -57,7 +55,11 @@ public class LoginActivity extends BaseActivity implements CallInterface {
     @Override
     public void doInUI() {
         if (result instanceof Result.Success){
-
+            Intent intent = new Intent(getApplicationContext(),RVActivity.class);
+            String email = mail.getText().toString();
+            String password = pswd.getText().toString();
+            ad= new AuthenticateData(email,password);
+            startActivity(intent);
         }else {
             Result.Error resultado = (Result.Error) result;
             Toast.makeText(this, resultado.getError(), Toast.LENGTH_SHORT).show();
