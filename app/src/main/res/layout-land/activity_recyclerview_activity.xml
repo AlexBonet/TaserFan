@@ -14,32 +14,32 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/rbtodos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="Todos" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/rbcoche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Coches" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/rbmotos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Motos" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/rbpatin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Patinetes" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/rbbicis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bicicletas" />

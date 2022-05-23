@@ -41,6 +41,19 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
         rd = findViewById(R.id.radioGroup);
         editText = findViewById(R.id.filtro);
         btnAdd = findViewById(R.id.btnAdd);
+        todos = findViewById(R.id.rbtodos);
+        coche = findViewById(R.id.rbcoche);
+        patin = findViewById(R.id.rbpatin);
+        bicis = findViewById(R.id.rbbicis);
+        motos = findViewById(R.id.rbmotos);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),AddVehiculo.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -61,11 +74,9 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
     @Override
     public void onClick(View view) {
-        Intent intent;
-
-        if (view == btnAdd){
-            intent = new Intent(getApplicationContext(),AddVehiculo.class);
-            startActivity(intent);
-        }
+        int posi = recyclerView.getChildAdapterPosition(view);
+        Intent intent = new Intent(getApplicationContext(),VistaExtendiad.class);
+        intent.putExtra("matricula",vehiculoList.get(posi).getMatricula());
+        startActivity(intent);
     }
 }
