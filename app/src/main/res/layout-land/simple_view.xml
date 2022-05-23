@@ -32,8 +32,7 @@
         android:id="@+id/marca2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginStart="64dp"
         android:text="MARCA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/matricula2"
@@ -43,37 +42,20 @@
         android:id="@+id/estado2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="64dp"
         android:text="ESTADO"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/matricula2"
+        app:layout_constraintStart_toEndOf="@+id/marca2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/color2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:text="COLOR"
         app:layout_constraintBottom_toBottomOf="@+id/estado2"
-        app:layout_constraintEnd_toStartOf="@+id/bateria"
         app:layout_constraintStart_toEndOf="@+id/estado2"
         app:layout_constraintTop_toTopOf="@+id/estado2" />
 
-    <TextView
-        android:id="@+id/precio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PRECIOHORA"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="30dp" />
-
-    <TextView
-        android:id="@+id/bateria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BATERIA"
-        app:layout_constraintBottom_toBottomOf="@+id/color2"
-        app:layout_constraintStart_toStartOf="@+id/precio"
-        app:layout_constraintTop_toTopOf="@+id/color2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,15 +11,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taserfan.R;
+import com.example.taserfan.actividades.vehiculos.Vehiculo;
+
+import java.util.List;
 
 public class RVAdapter  extends RecyclerView.Adapter<RVAdapter  .ViewHolder> {
 
     private LayoutInflater inflater;
     private View.OnClickListener onClickListener;
+    private List<Vehiculo> list;
+
+    public  RVAdapter(Context context, List<Vehiculo> list){
+        this.list = list;
+        inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+    }
 
     public RVAdapter(Context context, LayoutInflater inflater) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+    }
+
+    public RVAdapter(View.OnClickListener onClickListener, List<Vehiculo> list) {
+        this.onClickListener = onClickListener;
     }
 
     public RVAdapter(View.OnClickListener onClickListener) {
@@ -35,16 +48,18 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter  .ViewHolder> {
 
     @Override //TODO posar que pillem
     public void onBindViewHolder(@NonNull RVAdapter.ViewHolder holder, int position) {
+        Vehiculo v = list.get(position);
+
         holder.img.setImageResource(R.drawable.ic_baseline_pedal_bike_24);
-        holder.matricula.setText("matriiicula");
-        holder.marca.setText("marcaaaa");
-        holder.estado.setText("estaadooo");
-        holder.color.setText("rojo");
+        holder.matricula.setText(v.getMatricula());
+        holder.marca.setText(v.getMarca());
+        holder.estado.setText(v.getEstado());
+        holder.color.setText(v.getColor());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public void setOnClickListener(View.OnClickListener onClickListener) {

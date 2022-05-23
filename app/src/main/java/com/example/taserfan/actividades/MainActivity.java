@@ -1,31 +1,31 @@
 package com.example.taserfan.actividades;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
 import com.example.taserfan.base.BaseActivity;
-import com.example.taserfan.base.CallInterface;
 
 public class MainActivity extends BaseActivity {
 
-    private Button start, pref;
+    private Button start, pref, rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        start = findViewById(R.id.button);
+        start = findViewById(R.id.buttonLogIn);
         pref = findViewById(R.id.button2);
+        rv = findViewById(R.id.buttonRV);
+
+
 
         start.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
@@ -37,6 +37,10 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         });
 
+        rv.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),RVActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaserFan">
         <activity
+            android:name=".actividades.AddVehiculo"
+            android:exported="false" />
+        <activity
             android:name=".actividades.VistaExtendiad"
             android:exported="false" />
         <activity
