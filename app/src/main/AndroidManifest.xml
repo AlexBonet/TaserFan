@@ -25,9 +25,11 @@
         <activity
             android:name=".actividades.prefe.PreferenciasActivity"
             android:exported="false" />
+
+        <!-- PRIMERA ACTIVIDAD-->
         <activity
-            android:name=".actividades.MainActivity"
-            android:exported="true">
+            android:name=".actividades.LoginActivity"
+            android:exported="true"><!-- PRIMERA ACTIVIDAD-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".actividades.LoginActivity"
+            android:name=".actividades.MainActivity"
             android:exported="true"
             android:label="@string/app_name" />
     </application>
