@@ -58,6 +58,7 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
                 startActivity(intent);
             }
         });
+        executeCall(this);
     }
 
     @Override
@@ -68,14 +69,13 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
     @Override
     public void doInUI() {
-        hideProgress();
-
         RVAdapter myRVAdapter = new RVAdapter(getApplicationContext(), vehiculoList);
         myRVAdapter.setOnClickListener(this);
         recyclerView.setAdapter(myRVAdapter);
 
-        LinearLayoutManager myLinearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(myLinearLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     @Override

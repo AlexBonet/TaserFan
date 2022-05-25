@@ -46,7 +46,7 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter  .ViewHolder> {
         view.setOnClickListener(onClickListener);
         return new RVAdapter.ViewHolder(view);    }
 
-    @Override //TODO posar que pillem
+    @Override //TODO QUE CAMBIE LA FOTO
     public void onBindViewHolder(@NonNull RVAdapter.ViewHolder holder, int position) {
         Vehiculo v = list.get(position);
 
