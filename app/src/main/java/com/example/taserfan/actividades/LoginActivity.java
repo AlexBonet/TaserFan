@@ -1,13 +1,15 @@
 package com.example.taserfan.actividades;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.taserfan.API.API;
 import com.example.taserfan.API.Connector;
@@ -46,9 +48,9 @@ public class LoginActivity extends BaseActivity implements CallInterface {
     }
 
     @Override
-    public void doInBackground() {//error te que estar per así
+    public void doInBackground() {
         ad = new AuthenticateData(mail.getText().toString(),pswd.getText().toString());
-        result = Connector.getConector().postu(Empleado.class,ad);
+        result = Connector.getConector().post(Empleado.class,ad, API.Routes.AUTHENTICATE);
 
     }
 
@@ -57,13 +59,33 @@ public class LoginActivity extends BaseActivity implements CallInterface {
         Intent intent;
         if (result instanceof Result.Success){
             LoggedInUserRepository.getInstance().login(((Result.Success<Empleado>) result).getData());
-            intent = new Intent(getApplicationContext(), PreferenciasActivity.class);
+            intent = new Intent(getApplicationContext(), RVActivity.class);
             startActivity(intent);
+            Toast.makeText(this, "Log In", Toast.LENGTH_SHORT).show();
         }else {
             Result.Error resultado = (Result.Error) result;
-            intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            Toast.makeText(this, "F "+ resultado.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  resultado.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*MENU*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.confi):
+                Intent intentPreferenciasActivity = new Intent(this, PreferenciasActivity.class);
+                startActivity(intentPreferenciasActivity);
+                return true;
+            case (R.id.exit):
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

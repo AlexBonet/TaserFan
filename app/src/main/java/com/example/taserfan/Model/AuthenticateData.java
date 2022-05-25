@@ -2,11 +2,11 @@ package com.example.taserfan.Model;
 
 public class AuthenticateData {
     private String email;
-    private String passwd;
+    private String password;
 
     public AuthenticateData(String email, String passwd) {
         this.email = email;
-        this.passwd = passwd;
+        this.password = passwd;
     }
 
     public String getEmail() {
@@ -17,11 +17,11 @@ public class AuthenticateData {
         this.email = email;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -1,10 +1,13 @@
 package com.example.taserfan.actividades;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +17,7 @@ import android.widget.RadioGroup;
 
 import com.example.taserfan.API.Connector;
 import com.example.taserfan.R;
+import com.example.taserfan.actividades.prefe.PreferenciasActivity;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
@@ -58,15 +62,17 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
     @Override
     public void doInBackground() {
-        vehiculoList = new LinkedList<>(Connector.getConector().getAsList(Vehiculo.class, "/vehiculos"));
+        vehiculoList = new LinkedList<>(Connector.getConector().getAsList(Vehiculo.class, "/vehicles"));
 
     }
 
     @Override
     public void doInUI() {
-        RVAdapter myRecyclerViewAdapter = new RVAdapter(getApplicationContext(), vehiculoList);
-        myRecyclerViewAdapter.setOnClickListener(this);
-        recyclerView.setAdapter(myRecyclerViewAdapter);
+        hideProgress();
+
+        RVAdapter myRVAdapter = new RVAdapter(getApplicationContext(), vehiculoList);
+        myRVAdapter.setOnClickListener(this);
+        recyclerView.setAdapter(myRVAdapter);
 
         LinearLayoutManager myLinearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(myLinearLayoutManager);
@@ -78,5 +84,26 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
         Intent intent = new Intent(getApplicationContext(),VistaExtendiad.class);
         intent.putExtra("matricula",vehiculoList.get(posi).getMatricula());
         startActivity(intent);
+    }
+
+    /*MENU*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.confi):
+                Intent intentPreferenciasActivity = new Intent(this, PreferenciasActivity.class);
+                startActivity(intentPreferenciasActivity);
+                return true;
+            case (R.id.exit):
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

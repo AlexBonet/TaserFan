@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import com.example.taserfan.R;
-
+//TODO tot (fer que se puga scroll)
 public class AddVehiculo extends AppCompatActivity {
 
     @Override
