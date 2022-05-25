@@ -64,7 +64,6 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
     @Override
     public void doInBackground() {
         vehiculoList = new LinkedList<>(Connector.getConector().getAsList(Vehiculo.class, "/vehicles"));
-
     }
 
     @Override
