@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.taserfan.R;
-
+//TODO SABER DE QUIN tipo es cada vehiculo y fer tot
 public class VistaExtendiad extends AppCompatActivity {
 
     private ImageButton edit, back;

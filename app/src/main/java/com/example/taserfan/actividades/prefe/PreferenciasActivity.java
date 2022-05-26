@@ -15,5 +15,6 @@ public class PreferenciasActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new PreferenciasFragment())
                 .commit();
+        //TODO FER QUE si en el menu li donem a cerrar sesion mos duga al login
     }
 }

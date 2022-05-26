@@ -52,8 +52,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Matricula" />
+                    android:hint="Matricula"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,8 +76,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Precio por hora" />
+                    android:hint="Precio por hora"
+                    android:inputType="numberDecimal" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -100,8 +101,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Marca" />
+                    android:hint="Marca"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -124,8 +125,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Descripcion" />
+                    android:hint="Descripcion"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -148,8 +149,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Color" />
+                    android:hint="Color"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -172,8 +173,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Bateria" />
+                    android:hint="Bateria"
+                    android:inputType="number" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -196,8 +198,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Fecha adquisicion" />
+                    android:hint="Fecha de adquisicion"
+                    android:inputType="date" />
 
             </LinearLayout>
 
@@ -220,8 +222,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Estado" />
+                    android:hint="Estado"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -243,8 +245,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Carnet" />
+                    android:hint="Carnet"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -267,8 +269,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Numero de puertas" />
+                    android:hint="Numero de puertas"
+                    android:inputType="number" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -291,8 +294,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Numero de plazas" />
+                    android:hint="Numero de plazas"
+                    android:inputType="number" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -315,8 +319,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Velocidad maxima" />
+                    android:hint="Velocidad maxima"
+                    android:inputType="number" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -339,8 +344,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Cilindrada" />
+                    android:hint="Cilindrada"
+                    android:inputType="number" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -363,8 +369,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Tamaño" />
+                    android:hint="Tamaño"
+                    android:inputType="number" />
             </LinearLayout>
 
             <LinearLayout
@@ -387,8 +393,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Numero de ruedas" />
+                    android:hint="Numero de ruedas"
+                    android:inputType="number" />
             </LinearLayout>
 
             <LinearLayout
@@ -411,15 +417,28 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Tipo de bici" />
+                    android:hint="Tipo de bici"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_add_veh"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_add_veh"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="AÑADIR" />
+
+                <Button
+                    android:id="@+id/btn_cancel_add"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CANCELAR" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

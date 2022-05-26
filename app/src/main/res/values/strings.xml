@@ -10,7 +10,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="settings">Opciones</string>
-    <string name="exit">Salir</string>
+    <string name="exit">Cerrar Sesión</string>
     <string name="default_string">Default</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>

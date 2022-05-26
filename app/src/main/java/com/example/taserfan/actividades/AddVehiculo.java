@@ -2,6 +2,7 @@ package com.example.taserfan.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,20 +12,29 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
+import com.example.taserfan.API.Result;
+import com.example.taserfan.Model.Empleado;
 import com.example.taserfan.R;
+import com.example.taserfan.actividades.vehiculos.Coche;
+import com.example.taserfan.actividades.vehiculos.Patinete;
+import com.example.taserfan.actividades.vehiculos.Vehiculo;
+import com.example.taserfan.base.BaseActivity;
+import com.example.taserfan.base.CallInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //TODO tot (fer que se puga scroll)
-public class AddVehiculo extends AppCompatActivity{
+public class AddVehiculo extends BaseActivity implements CallInterface {
      private LinearLayout lineaBici, lineaMoto1, lineaMoto2, lineaPatin1, lineaPatin2, lineaCoche1, lineaCoche2;
      private EditText matricula, marca, fecha, estado, precio, descripcion, color, carnet, bateria,
         puertasCoche, plazasCoche, velocidadMoto, cilindradaMoto, tipoBici, ruedasPatin, tamanoPatin;
      private Spinner spinner;
-     private Button btn_add_veh;
+     private Button btn_add_veh, btn_cancel;
      private String tipo;
+     private Result<Vehiculo> result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +75,18 @@ public class AddVehiculo extends AppCompatActivity{
         tamanoPatin = findViewById(R.id.inputMatriucla);
 
         btn_add_veh=findViewById(R.id.btn_add_veh);
-        btn_add_veh.setOnClickListener(new View.OnClickListener() {
+        btn_add_veh.setOnClickListener(view -> {
+            executeCall(AddVehiculo.this);
+            //anar a la lista
+            //TODO añadir en el menu el icono de tornar arrer en detalle y ad
+        });
+
+        btn_cancel = findViewById(R.id.btn_cancel_add);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //anar a la lista
-                //TODO añadir en el menu el icono de tornar arrer en detalle y add
+                Intent intent = new Intent(getApplicationContext(),RVActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -95,7 +112,14 @@ public class AddVehiculo extends AppCompatActivity{
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
+
+                    //(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet);
+//                    Coche c = new Coche(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
+//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());
+
                 }else if(tipo=="PATINETE"){
+                    Patinete p;
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
                     lineaCoche2.setVisibility(View.GONE);
@@ -103,6 +127,10 @@ public class AddVehiculo extends AppCompatActivity{
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.VISIBLE);
                     lineaPatin2.setVisibility(View.VISIBLE);
+
+//                    Patinete p = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
+//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());)
                 }else if(tipo=="MOTO"){
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -111,6 +139,10 @@ public class AddVehiculo extends AppCompatActivity{
                     lineaMoto2.setVisibility(View.VISIBLE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
+
+//                    Moto m = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
+//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());)
                 }else if(tipo=="BICICLETA"){
                     lineaBici.setVisibility(View.VISIBLE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -119,6 +151,10 @@ public class AddVehiculo extends AppCompatActivity{
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
+
+//                    Bicicleta b = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
+//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());)
                 }else {
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -135,6 +171,27 @@ public class AddVehiculo extends AppCompatActivity{
 
             }
         });
+
+    }
+
+    @Override
+    public void doInBackground() {
+
+    }
+
+    @Override
+    public void doInUI() {
+        Intent intent;
+        if (result instanceof Result.Success){
+            LoggedInUserRepository.getInstance().login(((Result.Success<Empleado>) result).getData());
+            intent = new Intent(getApplicationContext(), RVActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, tipo + " AÑADIDO", Toast.LENGTH_SHORT).show();
+        }else {
+            Result.Error resultado = (Result.Error) result;
+            Toast.makeText(this, "MAL" + resultado.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }
