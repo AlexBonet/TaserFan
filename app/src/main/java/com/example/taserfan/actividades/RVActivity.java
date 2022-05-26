@@ -1,6 +1,7 @@
 package com.example.taserfan.actividades;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.example.taserfan.actividades.prefe.PreferenciasActivity;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -75,6 +77,31 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        /*DESLIZAR PARA ELIMINAR*/
+        ItemTouchHelper mIth = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                        // move item in `fromPos` to `toPos` in adapter.
+                        recyclerView.getAdapter().notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                        return true;// true if moved, false otherwise
+                    }
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        Vehiculo vehiculo = vehiculoList.get(viewHolder.getAdapterPosition());
+                        int position = viewHolder.getAdapterPosition();
+                        vehiculoList.remove(position);
+                        myRVAdapter.notifyItemRemoved(position);
+
+                        Snackbar.make(recyclerView, "Deleted " + vehiculo.getMatricula(), Snackbar.LENGTH_LONG)
+                                .setAction("Undo", v -> {
+                                    vehiculoList.add(position, vehiculo);
+                                    myRVAdapter.notifyItemInserted(position);
+                                }).show();
+                    }
+                });
+        mIth.attachToRecyclerView(recyclerView);
     }
 
     @Override

@@ -33,6 +33,8 @@
         android:id="@+id/marca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="MARCA"
         android:textColor="@color/titulo"
         app:layout_constraintBottom_toBottomOf="@+id/estado"
@@ -44,21 +46,21 @@
         android:id="@+id/estado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:text="ESTADO"
         android:textColor="@color/titulo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/matricula"
-        app:layout_constraintStart_toStartOf="@+id/matricula"
+        app:layout_constraintEnd_toStartOf="@+id/color"
         app:layout_constraintTop_toBottomOf="@+id/matricula" />
 
     <TextView
         android:id="@+id/color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="COLOR"
         android:textColor="@color/titulo"
         app:layout_constraintBottom_toBottomOf="@+id/estado"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/estado"
         app:layout_constraintTop_toTopOf="@+id/estado" />
 </androidx.constraintlayout.widget.ConstraintLayout>
