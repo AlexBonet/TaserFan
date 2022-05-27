@@ -1,9 +1,12 @@
 package com.example.taserfan.actividades;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,7 +20,10 @@ import android.widget.Toast;
 import com.example.taserfan.API.Result;
 import com.example.taserfan.Model.Empleado;
 import com.example.taserfan.R;
+import com.example.taserfan.actividades.prefe.PreferenciasActivity;
+import com.example.taserfan.actividades.vehiculos.Bicicleta;
 import com.example.taserfan.actividades.vehiculos.Coche;
+import com.example.taserfan.actividades.vehiculos.Moto;
 import com.example.taserfan.actividades.vehiculos.Patinete;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
@@ -26,11 +32,12 @@ import com.example.taserfan.base.CallInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO tot (fer que se puga scroll)
+//TODO llamada que pase info
 public class AddVehiculo extends BaseActivity implements CallInterface {
      private LinearLayout lineaBici, lineaMoto1, lineaMoto2, lineaPatin1, lineaPatin2, lineaCoche1, lineaCoche2;
      private EditText matricula, marca, fecha, estado, precio, descripcion, color, carnet, bateria,
         puertasCoche, plazasCoche, velocidadMoto, cilindradaMoto, tipoBici, ruedasPatin, tamanoPatin;
+
      private Spinner spinner;
      private Button btn_add_veh, btn_cancel;
      private String tipo;
@@ -112,14 +119,13 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
-
+                    btn_add_veh.setText("AÑADIR COCHE");
                     //(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet);
-//                    Coche c = new Coche(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
-//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());
+                    Coche c = new Coche(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
+                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());
 
                 }else if(tipo=="PATINETE"){
-                    Patinete p;
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
                     lineaCoche2.setVisibility(View.GONE);
@@ -127,10 +133,11 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.VISIBLE);
                     lineaPatin2.setVisibility(View.VISIBLE);
+                    btn_add_veh.setText("AÑADIR PATINETE");
 
-//                    Patinete p = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
-//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());)
+                    Patinete p = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
+                            ,ruedasPatin.getText().toString(),tamanoPatin.getText().toString());
                 }else if(tipo=="MOTO"){
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -139,10 +146,11 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaMoto2.setVisibility(View.VISIBLE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
+                    btn_add_veh.setText("AÑADIR MOTO");
 
-//                    Moto m = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
-//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());)
+                    Moto m = new Moto(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
+                            ,velocidadMoto.getText().toString(),cilindradaMoto.getText().toString());
                 }else if(tipo=="BICICLETA"){
                     lineaBici.setVisibility(View.VISIBLE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -151,10 +159,11 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
+                    btn_add_veh.setText("AÑADIR BICICLETA");
 
-//                    Bicicleta b = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-//                    color.getText().toString(), ((int) bateria.getText().toString()),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
-//                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());)
+                    Bicicleta b = new Bicicleta(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
+                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString(),
+                            tipoBici.getText().toString());
                 }else {
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -174,6 +183,7 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
 
     }
 
+    //CONEXION BD
     @Override
     public void doInBackground() {
 
@@ -193,5 +203,28 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
         }
 
 
+    }
+
+    /*MENU*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intentPreferenciasActivity;
+        switch (item.getItemId()) {
+            case (R.id.confi):
+                intentPreferenciasActivity = new Intent(this, PreferenciasActivity.class);
+                startActivity(intentPreferenciasActivity);
+                return true;
+            case (R.id.exit):
+                intentPreferenciasActivity = new Intent(this, LoginActivity.class);
+                startActivity(intentPreferenciasActivity);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

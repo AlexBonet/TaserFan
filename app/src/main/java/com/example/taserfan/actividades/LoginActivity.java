@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity implements CallInterface {
 
             }
         });
-//todo fer hint els botons
+
     }
 
     @Override

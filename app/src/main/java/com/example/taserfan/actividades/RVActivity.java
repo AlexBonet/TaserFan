@@ -108,7 +108,7 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
     public void onClick(View view) {
         int posi = recyclerView.getChildAdapterPosition(view);
         Intent intent = new Intent(getApplicationContext(),VistaExtendiad.class);
-        intent.putExtra("matricula",vehiculoList.get(posi).getMatricula());
+        intent.putExtra("vehicle",vehiculoList.get(posi));
         startActivity(intent);
     }
 
@@ -121,13 +121,15 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intentPreferenciasActivity;
         switch (item.getItemId()) {
             case (R.id.confi):
-                Intent intentPreferenciasActivity = new Intent(this, PreferenciasActivity.class);
+                intentPreferenciasActivity = new Intent(this, PreferenciasActivity.class);
                 startActivity(intentPreferenciasActivity);
                 return true;
             case (R.id.exit):
-                finish();
+                intentPreferenciasActivity = new Intent(this, LoginActivity.class);
+                startActivity(intentPreferenciasActivity);
             default:
                 return super.onOptionsItemSelected(item);
         }

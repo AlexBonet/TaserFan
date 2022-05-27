@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".actividades.AddVehiculo">
+    tools:context=".actividades.UpdVehiculo">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,13 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:gravity="bottom|center_horizontal"
-                android:text="PARA AÑADIR UN VEHICULO SELECCIONE SU TIPO:"
-                android:textSize="16sp" />
-
-            <Spinner
-                android:id="@+id/spinner_tipos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:text="ACTUALIZAR VEHICULO"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:id="@+id/lineaMatricula"
@@ -47,13 +42,14 @@
                     android:text="MATRICULA: " />
 
                 <EditText
-                    android:id="@+id/inputMatriucla"
+                    android:id="@+id/updMatriucla"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Matricula"
+                    android:hint="Matriucla"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -68,10 +64,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="PRECIO HORA" />
+                    android:text="PRECIO HORA:" />
 
                 <EditText
-                    android:id="@+id/inputPrecio"
+                    android:id="@+id/updPrecio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -93,16 +89,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="MARCA" />
+                    android:text="MARCA:" />
 
                 <EditText
-                    android:id="@+id/inputMarca"
+                    android:id="@+id/updMarca"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Marca"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -120,13 +117,14 @@
                     android:text="DESCRIPCION: " />
 
                 <EditText
-                    android:id="@+id/inputDescripcion"
+                    android:id="@+id/updDescip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Descripcion"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -144,13 +142,14 @@
                     android:text="COLOR: " />
 
                 <EditText
-                    android:id="@+id/inputColor"
+                    android:id="@+id/updColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Color"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -168,13 +167,13 @@
                     android:text="BATERIA: " />
 
                 <EditText
-                    android:id="@+id/inputBateria"
+                    android:id="@+id/updBateria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Bateria"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
             </LinearLayout>
 
@@ -193,12 +192,12 @@
                     android:text="FECHA ADQUISICION: " />
 
                 <EditText
-                    android:id="@+id/inputFecha"
+                    android:id="@+id/updFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Fecha de adquisicion"
+                    android:hint="Fecha adquisicion"
                     android:inputType="date" />
 
             </LinearLayout>
@@ -217,13 +216,14 @@
                     android:text="ESTADO: " />
 
                 <EditText
-                    android:id="@+id/inputEstado"
+                    android:id="@+id/updEstado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Estado"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -240,13 +240,14 @@
                     android:text="CARNET: " />
 
                 <EditText
-                    android:id="@+id/inputCarnet"
+                    android:id="@+id/updCarnet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Carnet"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -264,7 +265,7 @@
                     android:text="NUMERO PUERTAS:" />
 
                 <EditText
-                    android:id="@+id/inputpuertasc"
+                    android:id="@+id/updPuertas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -289,13 +290,13 @@
                     android:text="NUMERO PLAZAS:" />
 
                 <EditText
-                    android:id="@+id/inputplazasC"
+                    android:id="@+id/updPlazas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Numero de plazas"
-                    android:inputType="numberSigned" />
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -314,7 +315,7 @@
                     android:text="VELOCIDAD MAXIMA:" />
 
                 <EditText
-                    android:id="@+id/inputVelocidadM"
+                    android:id="@+id/updVel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -339,7 +340,7 @@
                     android:text="CILINDRADA:" />
 
                 <EditText
-                    android:id="@+id/inputCilindradaM"
+                    android:id="@+id/updCilind"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -364,13 +365,14 @@
                     android:text="TAMAÑO" />
 
                 <EditText
-                    android:id="@+id/inputtamano"
+                    android:id="@+id/updTamano"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Tamaño"
+                    android:hint="Tamaño de las ruedas"
                     android:inputType="number" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -388,13 +390,14 @@
                     android:text="NUMERO RUEDAS" />
 
                 <EditText
-                    android:id="@+id/inputRuedasP"
+                    android:id="@+id/updRuedaP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Numero de ruedas"
                     android:inputType="number" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -412,13 +415,14 @@
                     android:text="TIPO:" />
 
                 <EditText
-                    android:id="@+id/inputbici"
+                    android:id="@+id/updTBici"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Tipo de bici"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -427,10 +431,11 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_add_veh"
+                    android:id="@+id/btn_upd_veh"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="AÑADIR" />
+                    android:layout_weight="1"
+                    android:text="ACTUALIZAS" />
 
                 <Button
                     android:id="@+id/btn_cancel_add"

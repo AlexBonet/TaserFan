@@ -10,20 +10,33 @@
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgVehExt"
             android:layout_width="match_parent"
             android:layout_height="103dp"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_baseline_directions_car_24" />
 
-        <TextView
-            android:id="@+id/matriculaExt"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="matricula" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/matriculaExt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5555 AAA"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,17 +45,20 @@
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Marca : " />
+                android:text="Marca: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/Nom"
-                android:layout_width="wrap_content"
+                android:id="@+id/marcaExt"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1.5"
+                android:text="MAZDA"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,17 +68,20 @@
 
             <TextView
                 android:id="@+id/textView12"
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Precio por hora: " />
+                android:text="Precio por hora: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+                android:id="@+id/precioExt"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1.5"
+                android:text="15.5"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,17 +91,20 @@
 
             <TextView
                 android:id="@+id/textView15"
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Descipcion: " />
+                android:text="Descipcion: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
+                android:id="@+id/descripExt"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1.5"
+                android:text="descripcion"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,17 +114,20 @@
 
             <TextView
                 android:id="@+id/textView16"
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Color: " />
+                android:text="Color: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
+                android:id="@+id/colorExt"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1.5"
+                android:text="Azul"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,17 +137,20 @@
 
             <TextView
                 android:id="@+id/textView18"
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Bateria: " />
+                android:text="Bateria: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
+                android:id="@+id/bateriaExt"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1.5"
+                android:text="15W"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,17 +160,20 @@
 
             <TextView
                 android:id="@+id/textView21"
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Fecha adquisicion: " />
+                android:text="Fecha adquisicion: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView22"
-                android:layout_width="wrap_content"
+                android:id="@+id/fechaExt"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1.5"
+                android:text="15/52/2022"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -152,17 +183,20 @@
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Estado: " />
+                android:text="Estado: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
+                android:id="@+id/estadoExt"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1.5"
+                android:text="preparado"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -172,17 +206,181 @@
 
             <TextView
                 android:id="@+id/textView25"
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Carnet: " />
+                android:text="Carnet: "
+                android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+                android:id="@+id/carnetExt"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="B"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lineaExtPlazasC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Numero plazas: "
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/plazasExt"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="10"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linExtPuertasC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Numero puertas:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/puertasExt"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="10"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linExtVelM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Velocidad maxima:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/velocidadExt"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="1000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linExtCiliM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cilindrada: "
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/cilindradaExt"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="300"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linExtRuedasP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Numero de ruedas:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/ruedasExtP"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="10"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lineaExtTamP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tamaño ruedas:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/tamanoExtP"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="TextView"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linExtBici"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tipo de bici:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/biciExt"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="montaña"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>

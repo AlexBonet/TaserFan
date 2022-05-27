@@ -1,9 +1,10 @@
 package com.example.taserfan.actividades.vehiculos;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.sql.Date;
 
-public class Coche extends Vehiculo {
+public class Coche extends Vehiculo implements Serializable {
     private int numPlazas;
     private int numPuertas;
 
