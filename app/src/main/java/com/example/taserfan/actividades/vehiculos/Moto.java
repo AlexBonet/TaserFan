@@ -8,19 +8,21 @@ public class Moto extends Vehiculo implements Serializable {
     private int velocidadMax;
     private int cilindrada;
 
-    public Moto(String matricula, float precioHora, String marca, String descripcion, String color, int bateria, Date fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, int velocidadMax, int cilindrada) {
-        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet, changeDts, changeBy);
-        this.velocidadMax = velocidadMax;
-        this.cilindrada = cilindrada;
-    }
-
-    public Moto(String matricula, float precioHora, String marca, String descripcion, String color, int bateria, Date fechaAdq, String estado, String idCarnet, int velocidadMax, int cilindrada) {
-        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet);
+    public Moto(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
+                Date fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, TipoVehiculos tipoVehiculo, int velocidadMax, int cilindrada) {
+        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet, changeDts, changeBy, tipoVehiculo);
         this.velocidadMax = velocidadMax;
         this.cilindrada = cilindrada;
     }
 
     public Moto(int velocidadMax, int cilindrada) {
+        this.velocidadMax = velocidadMax;
+        this.cilindrada = cilindrada;
+    }
+
+    public Moto(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
+                Date fechaAdq, String estado, String idCarnet, TipoVehiculos tipoVehiculo, int velocidadMax, int cilindrada) {
+        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet, tipoVehiculo);
         this.velocidadMax = velocidadMax;
         this.cilindrada = cilindrada;
     }

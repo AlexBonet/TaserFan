@@ -62,12 +62,9 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
         tamanoPatin = findViewById(R.id.updTamano);
 
         btn_cancel = findViewById(R.id.btn_cancel_add);
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),RVActivity.class);
-                startActivity(intent);
-            }
+        btn_cancel.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),RVActivity.class);
+            startActivity(intent);
         });
 
         btn_upd_veh = findViewById(R.id.btn_upd_veh);
@@ -76,6 +73,7 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),RVActivity.class);
                 //todo que añada
+                executeCall(UpdVehiculo.this);
 
                 startActivity(intent);
 

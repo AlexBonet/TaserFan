@@ -1,7 +1,6 @@
 package com.example.taserfan.actividades;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,17 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.example.taserfan.API.Result;
 import com.example.taserfan.Model.Empleado;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
-import com.example.taserfan.actividades.vehiculos.Bicicleta;
-import com.example.taserfan.actividades.vehiculos.Coche;
-import com.example.taserfan.actividades.vehiculos.Moto;
-import com.example.taserfan.actividades.vehiculos.Patinete;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
@@ -109,7 +103,7 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override //TODO QUE CAMBIE EL NOM BOTON, podem posar un cancelar que torne a la RV
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                tipo= tipos.get(i);
+               /* tipo= tipos.get(i);
 
                 if(tipo=="COCHE"){
                     lineaBici.setVisibility(View.GONE);
@@ -172,7 +166,7 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
-                }
+                }*/
             }
 
             @Override

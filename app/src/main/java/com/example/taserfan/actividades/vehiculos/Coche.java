@@ -8,19 +8,21 @@ public class Coche extends Vehiculo implements Serializable {
     private int numPlazas;
     private int numPuertas;
 
-    public Coche(String matricula, float precioHora, String marca, String descripcion, String color, int bateria, Date fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, int numPlazas, int numPuertas) {
-        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet, changeDts, changeBy);
-        this.numPlazas = numPlazas;
-        this.numPuertas = numPuertas;
-    }
-
-    public Coche(String matricula, float precioHora, String marca, String descripcion, String color, int bateria, Date fechaAdq, String estado, String idCarnet, int numPlazas, int numPuertas) {
-        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet);
+    public Coche(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
+                 Date fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, TipoVehiculos tipoVehiculo, int numPlazas, int numPuertas) {
+        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet, changeDts, changeBy, tipoVehiculo);
         this.numPlazas = numPlazas;
         this.numPuertas = numPuertas;
     }
 
     public Coche(int numPlazas, int numPuertas) {
+        this.numPlazas = numPlazas;
+        this.numPuertas = numPuertas;
+    }
+
+    public Coche(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
+                 Date fechaAdq, String estado, String idCarnet, TipoVehiculos tipoVehiculo, int numPlazas, int numPuertas) {
+        super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet, tipoVehiculo);
         this.numPlazas = numPlazas;
         this.numPuertas = numPuertas;
     }

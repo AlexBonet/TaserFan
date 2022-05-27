@@ -26,19 +26,6 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter  .ViewHolder> {
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public RVAdapter(Context context, LayoutInflater inflater) {
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-    }
-
-    public RVAdapter(View.OnClickListener onClickListener, List<Vehiculo> list) {
-        this.onClickListener = onClickListener;
-    }
-
-    public RVAdapter(View.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
     @NonNull
     @Override
     public RVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,11 +33,25 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter  .ViewHolder> {
         view.setOnClickListener(onClickListener);
         return new RVAdapter.ViewHolder(view);    }
 
-    @Override //TODO QUE CAMBIE LA FOTO
+    @Override //todo encara no se com pasem el tipo
     public void onBindViewHolder(@NonNull RVAdapter.ViewHolder holder, int position) {
         Vehiculo v = list.get(position);
 
-        holder.img.setImageResource(R.drawable.ic_baseline_pedal_bike_24);
+        switch (v.getTipoVehiculo()){
+            case MOTOS:
+                holder.img.setImageResource(R.drawable.ic_baseline_bike_scooter_24);
+                break;
+            case COCHE:
+                holder.img.setImageResource(R.drawable.ic_baseline_directions_car_24);
+                break;
+            case PATIN:
+                holder.img.setImageResource(R.drawable.ic_baseline_electric_scooter_24);
+                break;
+            case BICIS:
+                holder.img.setImageResource(R.drawable.ic_baseline_pedal_bike_24);
+                break;
+        }
+
         holder.matricula.setText(v.getMatricula());
         holder.marca.setText(v.getMarca());
         holder.estado.setText(v.getEstado());

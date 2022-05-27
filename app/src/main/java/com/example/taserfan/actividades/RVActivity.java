@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -26,7 +25,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 
 public class RVActivity extends BaseActivity implements CallInterface, View.OnClickListener {
@@ -65,7 +63,7 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
     @Override
     public void doInBackground() {
-        vehiculoList = new LinkedList<>(Connector.getConector().getAsList(Vehiculo.class, "/vehicles"));
+        vehiculoList = new LinkedList<>(Connector.getConector().getAsList(Vehiculo.class, "/vehiculos"));
     }
 
     @Override
@@ -108,7 +106,8 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
     public void onClick(View view) {
         int posi = recyclerView.getChildAdapterPosition(view);
         Intent intent = new Intent(getApplicationContext(),VistaExtendiad.class);
-        intent.putExtra("vehicle",vehiculoList.get(posi));
+        intent.putExtra("matricula",vehiculoList.get(posi).getMatricula());
+        intent.putExtra("tipo",vehiculoList.get(posi).getTipoVehiculo());
         startActivity(intent);
     }
 

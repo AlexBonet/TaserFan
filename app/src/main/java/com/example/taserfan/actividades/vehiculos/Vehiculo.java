@@ -16,8 +16,10 @@ public class Vehiculo implements Serializable {
     private String idCarnet;
     private Timestamp changeDts;
     private String changeBy;
+    private TipoVehiculos tipoVehiculo;
 
-    public Vehiculo(String matricula, float precioHora, String marca, String descripcion, String color, int bateria, Date fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy) {
+    public Vehiculo(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
+                    Date fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, TipoVehiculos tipoVehiculo) {
         this.matricula = matricula;
         this.precioHora = precioHora;
         this.marca = marca;
@@ -29,12 +31,11 @@ public class Vehiculo implements Serializable {
         this.idCarnet = idCarnet;
         this.changeDts = changeDts;
         this.changeBy = changeBy;
+        this.tipoVehiculo = tipoVehiculo;
     }
 
-    public Vehiculo() {
-    }
-
-    public Vehiculo(String matricula, float precioHora, String marca, String descripcion, String color, int bateria, Date fechaAdq, String estado, String idCarnet) {
+    public Vehiculo(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
+                    Date fechaAdq, String estado, String idCarnet, TipoVehiculos tipoVehiculo) {
         this.matricula = matricula;
         this.precioHora = precioHora;
         this.marca = marca;
@@ -44,6 +45,10 @@ public class Vehiculo implements Serializable {
         this.fechaAdq = fechaAdq;
         this.estado = estado;
         this.idCarnet = idCarnet;
+        this.tipoVehiculo = tipoVehiculo;
+    }
+
+    public Vehiculo() {
     }
 
     public String getMatricula() {
@@ -134,20 +139,11 @@ public class Vehiculo implements Serializable {
         this.changeBy = changeBy;
     }
 
-    @Override
-    public String toString() {
-        return "\nVehiculo{" +
-                "matricula='" + matricula + '\'' +
-                ", precioHora=" + precioHora +
-                ", marca='" + marca + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", color='" + color + '\'' +
-                ", bateria=" + bateria +
-                ", fechaAdq=" + fechaAdq +
-                ", estado='" + estado + '\'' +
-                ", idCarnet=" + idCarnet +
-                ", changeDts=" + changeDts +
-                ", changeBy='" + changeBy + '\'' +
-                '}';
+    public com.example.taserfan.actividades.vehiculos.TipoVehiculos getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(com.example.taserfan.actividades.vehiculos.TipoVehiculos tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
     }
 }

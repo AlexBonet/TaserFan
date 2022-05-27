@@ -12,6 +12,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.taserfan.API.API;
 import com.example.taserfan.R;
+import com.example.taserfan.ThemeSetup;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,11 +23,8 @@ public class PreferenciasFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.prefes,rootKey);
 
-        ListPreference temas = findPreference("temas");
-        EditTextPreference ip = findPreference("ip");
-        EditTextPreference puerto = findPreference("puerto");
-
         //Temas
+        ListPreference temas = findPreference("temas");
         List<String> entriesTemas = Arrays.asList(getResources().getStringArray(R.array.settings_theme_entries));
         List<String> valuesTemas = Arrays.asList(getResources().getStringArray(R.array.settings_theme_values));
         String tema = entriesTemas.get(valuesTemas.indexOf(GestionPreferencias.getTema(getContext())));
@@ -40,24 +38,31 @@ public class PreferenciasFragment extends PreferenceFragmentCompat {
             }
         });
 
+        // Theme preferences with ListPreference
+        ListPreference themePreference = getPreferenceManager().findPreference("temas");
+        if (themePreference.getValue() == null) {
+            themePreference.setValue(ThemeSetup.Mode.DEFAULT.name());
+        }
+        themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            ThemeSetup.applyTheme(ThemeSetup.Mode.valueOf((String) newValue));
+            return true;
+        });
+
+
         //IP
+        final EditTextPreference ip = findPreference("ip");
         ip.setSummary("IP seleccionada: " + API.Routes.IP);
-        ip.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                ip.setSummary("IP seleccionada: " + API.Routes.IP);
-                return true;
-            }
+        ip.setOnPreferenceChangeListener((preference, newValue) -> {
+            ip.setSummary("IP seleccionada: " + API.Routes.IP);
+            return true;
         });
 
         //Puerto
+        final EditTextPreference puerto = findPreference("puerto");
         puerto.setSummary("PUERTO seleccionado: " + API.Routes.PUERTO);
-        puerto.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                puerto.setSummary("PUERTO seleccionado: " + API.Routes.PUERTO);
-                return true;
-            }
+        puerto.setOnPreferenceChangeListener((preference, newValue) -> {
+            puerto.setSummary("PUERTO seleccionado: " + API.Routes.PUERTO);
+            return true;
         });
     }
 }

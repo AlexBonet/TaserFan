@@ -1,7 +1,6 @@
 package com.example.taserfan.actividades;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.taserfan.API.Connector;
 import com.example.taserfan.API.Result;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
@@ -108,7 +106,7 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
     //CONEXION DB
     @Override
     public void doInBackground() {//todo?? com pillem el tipo y fem la llamada
-
+/*TODO
         cResult = Connector.getConector().get(Coche.class,"/coche?matricula="+v.getMatricula());
 
         if (Connector.getConector().get(Coche.class,"/coche?matricula="+v.getMatricula()) == Result<Coche>){
@@ -166,7 +164,7 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             ruedasPatin.setText(patinete.getNumRuedas());
         }else if (cResult == Result<Coche> ){
 
-        }
+        }*/
 
     }
 
