@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.taserfan.API.Connector;
 import com.example.taserfan.API.Result;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
@@ -19,11 +20,11 @@ import com.example.taserfan.actividades.vehiculos.Bicicleta;
 import com.example.taserfan.actividades.vehiculos.Coche;
 import com.example.taserfan.actividades.vehiculos.Moto;
 import com.example.taserfan.actividades.vehiculos.Patinete;
+import com.example.taserfan.actividades.vehiculos.TipoVehiculos;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
 
-//TODO SABER DE QUIN tipo es cada vehiculo y fer tot
 public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
 
     private ImageButton edit, back;
@@ -32,33 +33,43 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             puertasCoche, plazasCoche, velocidadMoto, cilindradaMoto, tipoBici, ruedasPatin, tamanoPatin;
     private LinearLayout lineaBici, lineaMoto1, lineaMoto2, lineaPatin1, lineaPatin2, lineaCoche1, lineaCoche2;
     private ImageView img;
-    Vehiculo v;
-    Result<T> result;
+
     Result<Coche> cResult;
     Result<Moto> mResult;
     Result<Bicicleta> bResult;
     Result<Patinete> pResult;
-    Coche coche;
-    Moto moto;
-    Patinete patinete;
-    Bicicleta bicicleta;
-    private Object Result;
-    private Object Coche;
 
-    //todo mirar el tipo pa la foto: puc fer el execute col de get y el tipo de result que torne dirá el tipo y la foto que es
+    private String v_matricula;
+    private TipoVehiculos tipo;
+    private Coche coche;
+    private Moto moto;
+    private Patinete patinete;
+    private Bicicleta bicicleta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extended_view);
 
-        v = (Vehiculo) getIntent().getExtras().getSerializable("vehicle");
+        v_matricula = getIntent().getExtras().getString("matricula");
+        tipo = (TipoVehiculos) getIntent().getExtras().getSerializable("tipo");
 
         edit = findViewById(R.id.btnEdit);
         back = findViewById(R.id.btnBack);
 
         edit.setOnClickListener(view -> {
-            intent = new Intent(getApplicationContext(),AddVehiculo.class);
+            intent = new Intent(getApplicationContext(),UpdVehiculo.class);
+            intent.putExtra("tipo",tipo);
+
+            if (tipo == TipoVehiculos.COCHE)
+                intent.putExtra("co",coche);
+            else if (tipo == TipoVehiculos.MOTOS)
+                intent.putExtra("mo",moto);
+            else if (tipo == TipoVehiculos.PATIN)
+                intent.putExtra("pa",patinete);
+            else if (tipo == TipoVehiculos.BICIS)
+                intent.putExtra("bi",bicicleta);
+
             startActivity(intent);
         });
 
@@ -75,13 +86,13 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
         lineaPatin1 = findViewById(R.id.linExtRuedasP);
         lineaPatin2 = findViewById(R.id.lineaExtTamP);
 
-        lineaBici.setVisibility(View.GONE);
-        lineaCoche1.setVisibility(View.GONE);
-        lineaCoche2.setVisibility(View.GONE);
-        lineaMoto1.setVisibility(View.GONE);
-        lineaMoto2.setVisibility(View.GONE);
-        lineaPatin1.setVisibility(View.GONE);
-        lineaPatin2.setVisibility(View.GONE);
+//        lineaBici.setVisibility(View.GONE);
+//        lineaCoche1.setVisibility(View.GONE);
+//        lineaCoche2.setVisibility(View.GONE);
+//        lineaMoto1.setVisibility(View.GONE);
+//        lineaMoto2.setVisibility(View.GONE);
+//        lineaPatin1.setVisibility(View.GONE);
+//        lineaPatin2.setVisibility(View.GONE);
 
         matricula = findViewById(R.id.matriculaExt);
         marca = findViewById(R.id.marcaExt);
@@ -105,12 +116,36 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
 
     //CONEXION DB
     @Override
-    public void doInBackground() {//todo?? com pillem el tipo y fem la llamada
-/*TODO
-        cResult = Connector.getConector().get(Coche.class,"/coche?matricula="+v.getMatricula());
+    public void doInBackground() {
+        if (tipo == TipoVehiculos.COCHE){
+            cResult = Connector.getConector().get(Coche.class,"/coche?matricula="+v_matricula);
 
-        if (Connector.getConector().get(Coche.class,"/coche?matricula="+v.getMatricula()) == Result<Coche>){
+        }else if (tipo == TipoVehiculos.MOTOS){
+            mResult = Connector.getConector().get(Moto.class,"/motos?matricula="+v_matricula);
+
+        }else if (tipo == TipoVehiculos.BICIS) {
+            bResult = Connector.getConector().get(Bicicleta.class,"/bicis?matricula="+v_matricula);
+
+        }else if (tipo == TipoVehiculos.PATIN) {
+            pResult = Connector.getConector().get(Patinete.class,"/patin?matricula="+v_matricula);
+
+        }
+    }
+
+    @Override
+    public void doInUI() {
+        if (tipo == TipoVehiculos.COCHE){
             coche = ((Result.Success<Coche>) cResult).getData();
+
+            lineaBici.setVisibility(View.GONE);
+            lineaCoche1.setVisibility(View.VISIBLE);
+            lineaCoche2.setVisibility(View.VISIBLE);
+            lineaMoto1.setVisibility(View.GONE);
+            lineaMoto2.setVisibility(View.GONE);
+            lineaPatin1.setVisibility(View.GONE);
+            lineaPatin2.setVisibility(View.GONE);
+
+            img.setImageResource(R.drawable.ic_baseline_directions_car_24);
             matricula.setText(coche.getMatricula());
             marca.setText(coche.getMarca());
             fecha.setText(String.valueOf(coche.getFechaAdq()));
@@ -123,8 +158,18 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             puertasCoche.setText(coche.getNumPuertas());
             plazasCoche.setText(coche.getNumPlazas());
 
-        }else if (Connector.getConector().get(Moto.class,"/coche?matricula="+v.getMatricula()) instanceof Result<Moto>){
+        }else if (tipo == TipoVehiculos.MOTOS){
             moto = ((Result.Success<Moto>) cResult).getData();
+
+            lineaBici.setVisibility(View.GONE);
+            lineaCoche1.setVisibility(View.GONE);
+            lineaCoche2.setVisibility(View.GONE);
+            lineaMoto1.setVisibility(View.VISIBLE);
+            lineaMoto2.setVisibility(View.VISIBLE);
+            lineaPatin1.setVisibility(View.GONE);
+            lineaPatin2.setVisibility(View.GONE);
+
+            img.setImageResource(R.drawable.ic_baseline_bike_scooter_24);
             matricula.setText(moto.getMatricula());
             marca.setText(moto.getMarca());
             fecha.setText(String.valueOf(moto.getFechaAdq()));
@@ -137,8 +182,18 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             cilindradaMoto.setText(moto.getCilindrada());
             velocidadMoto.setText(moto.getVelocidadMax());
 
-        }else if (Connector.getConector().get(Bicicleta.class,"/coche?matricula="+v.getMatricula()) instanceof Result<Bicicleta>) {
+        }else if (tipo == TipoVehiculos.BICIS) {
             bicicleta = ((Result.Success<Bicicleta>) cResult).getData();
+
+            lineaBici.setVisibility(View.VISIBLE);
+            lineaCoche1.setVisibility(View.GONE);
+            lineaCoche2.setVisibility(View.GONE);
+            lineaMoto1.setVisibility(View.GONE);
+            lineaMoto2.setVisibility(View.GONE);
+            lineaPatin1.setVisibility(View.GONE);
+            lineaPatin2.setVisibility(View.GONE);
+
+            img.setImageResource(R.drawable.ic_baseline_pedal_bike_24);
             matricula.setText(bicicleta.getMatricula());
             marca.setText(bicicleta.getMarca());
             fecha.setText(String.valueOf(bicicleta.getFechaAdq()));
@@ -148,9 +203,20 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             color.setText(bicicleta.getColor());
             carnet.setText(bicicleta.getIdCarnet());
             bateria.setText(bicicleta.getBateria());
-            cilindradaMoto.setText(bicicleta.getTipo());
-        }else if (Connector.getConector().get(Patinete.class,"/coche?matricula="+v.getMatricula()) instanceof Result<Patinete>){
+            tipoBici.setText(bicicleta.getTipo());
+
+        }else if (tipo == TipoVehiculos.PATIN) {
             patinete = ((Result.Success<Patinete>) cResult).getData();
+
+            lineaBici.setVisibility(View.GONE);
+            lineaCoche1.setVisibility(View.GONE);
+            lineaCoche2.setVisibility(View.GONE);
+            lineaMoto1.setVisibility(View.GONE);
+            lineaMoto2.setVisibility(View.GONE);
+            lineaPatin1.setVisibility(View.VISIBLE);
+            lineaPatin2.setVisibility(View.VISIBLE);
+
+            img.setImageResource(R.drawable.ic_baseline_electric_scooter_24);
             matricula.setText(patinete.getMatricula());
             marca.setText(patinete.getMarca());
             fecha.setText(String.valueOf(patinete.getFechaAdq()));
@@ -162,15 +228,7 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             bateria.setText(patinete.getBateria());
             tamanoPatin.setText(patinete.getTamanyo());
             ruedasPatin.setText(patinete.getNumRuedas());
-        }else if (cResult == Result<Coche> ){
-
-        }*/
-
-    }
-
-    @Override
-    public void doInUI() {
-
+        }
     }
     /*MENU*/
     @Override

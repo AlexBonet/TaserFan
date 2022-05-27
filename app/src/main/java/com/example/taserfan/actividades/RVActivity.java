@@ -1,10 +1,5 @@
 package com.example.taserfan.actividades;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +10,13 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.taserfan.API.Connector;
+import com.example.taserfan.API.Result;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
@@ -92,10 +93,35 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
                         vehiculoList.remove(position);
                         myRVAdapter.notifyItemRemoved(position);
 
+                        executeCall(new CallInterface() {
+                            @Override
+                            public void doInBackground() {
+                                Connector.getConector().delete(Vehiculo.class, "/coche?matricula="+vehiculo.getMatricula());
+                            }
+
+                            @Override
+                            public void doInUI() {
+
+                            }
+                        });
+
                         Snackbar.make(recyclerView, "Deleted " + vehiculo.getMatricula(), Snackbar.LENGTH_LONG)
                                 .setAction("Undo", v -> {
                                     vehiculoList.add(position, vehiculo);
                                     myRVAdapter.notifyItemInserted(position);
+
+                                    executeCall(new CallInterface() {
+                                        @Override
+                                        public void doInBackground() {
+
+                                        }
+
+                                        @Override
+                                        public void doInUI() {
+
+                                        }
+                                    });
+
                                 }).show();
                     }
                 });

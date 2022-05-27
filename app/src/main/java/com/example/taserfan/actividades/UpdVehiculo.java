@@ -12,8 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.example.taserfan.API.Connector;
+import com.example.taserfan.API.Result;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
+import com.example.taserfan.actividades.vehiculos.Bicicleta;
+import com.example.taserfan.actividades.vehiculos.Coche;
+import com.example.taserfan.actividades.vehiculos.Moto;
+import com.example.taserfan.actividades.vehiculos.Patinete;
+import com.example.taserfan.actividades.vehiculos.TipoVehiculos;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
 
@@ -22,6 +29,17 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
     private EditText matricula, marca, fecha, estado, precio, descripcion, color, carnet, bateria,
             puertasCoche, plazasCoche, velocidadMoto, cilindradaMoto, tipoBici, ruedasPatin, tamanoPatin;
     private Button btn_upd_veh, btn_cancel;
+
+    Result<Coche> cResult;
+    Result<Moto> mResult;
+    Result<Bicicleta> bResult;
+    Result<Patinete> pResult;
+
+    private TipoVehiculos tipo;
+    private Coche coche;
+    private Moto moto;
+    private Patinete patinete;
+    private Bicicleta bicicleta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +79,79 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
         ruedasPatin = findViewById(R.id.updRuedaP);
         tamanoPatin = findViewById(R.id.updTamano);
 
+        tipo = (TipoVehiculos) getIntent().getExtras().getSerializable("tipo");
+//TODO POSAR ELS ESPECIFICS DE CADA UNO
+        if (tipo == TipoVehiculos.COCHE) {
+            coche = (Coche) getIntent().getExtras().getSerializable("co");
+
+            matricula.setHint(coche.getMatricula());
+            marca.setHint(coche.getMarca());
+            fecha.setHint(coche.getFechaAdq().toString());
+            estado.setHint(coche.getEstado());
+            precio.setHint((int) coche.getPrecioHora());
+            descripcion.setHint(coche.getDescripcion());
+            color.setHint(coche.getColor());
+            carnet.setHint(coche.getIdCarnet());
+            bateria.setHint(coche.getBateria());
+
+
+        } else if (tipo == TipoVehiculos.MOTOS) {
+            moto = (Moto) getIntent().getExtras().getSerializable("mo");
+
+            matricula.setHint(moto.getMatricula());
+            marca.setHint(moto.getMarca());
+            fecha.setHint(moto.getFechaAdq().toString());
+            estado.setHint(moto.getEstado());
+            precio.setHint((int) moto.getPrecioHora());
+            descripcion.setHint(moto.getDescripcion());
+            color.setHint(moto.getColor());
+            carnet.setHint(moto.getIdCarnet());
+            bateria.setHint(moto.getBateria());
+
+            moto = new Moto(matricula.getText().toString(),
+                    precio.getText().toString(),
+                    marca.getText().toString(),
+                    descripcion.getText().toString(),
+                    color.getText().toString(),
+                    fecha.getText().toString(),
+                    estado.getText().toString(),
+                    carnet.getText().toString(),
+                    TipoVehiculos.MOTOS,
+                    velocidadMoto.getText().toString(),
+                    cilindradaMoto.getText().toString()
+            );
+
+        } else if (tipo == TipoVehiculos.PATIN) {
+            patinete = (Patinete)getIntent().getExtras().getSerializable("pa");
+
+            matricula.setHint(patinete.getMatricula());
+            marca.setHint(patinete.getMarca());
+            fecha.setHint(patinete.getFechaAdq().toString());
+            estado.setHint(patinete.getEstado());
+            precio.setHint((int) patinete.getPrecioHora());
+            descripcion.setHint(patinete.getDescripcion());
+            color.setHint(patinete.getColor());
+            carnet.setHint(patinete.getIdCarnet());
+            bateria.setHint(patinete.getBateria());
+
+        } else if (tipo == TipoVehiculos.BICIS) {
+            bicicleta = (Bicicleta) getIntent().getExtras().getSerializable("bi");
+
+            matricula.setHint(bicicleta.getMatricula());
+            marca.setHint(bicicleta.getMarca());
+            fecha.setHint(bicicleta.getFechaAdq().toString());
+            estado.setHint(bicicleta.getEstado());
+            precio.setHint((int) bicicleta.getPrecioHora());
+            descripcion.setHint(bicicleta.getDescripcion());
+            color.setHint(bicicleta.getColor());
+            carnet.setHint(bicicleta.getIdCarnet());
+            bateria.setHint(bicicleta.getBateria());
+
+        }
+
         btn_cancel = findViewById(R.id.btn_cancel_add);
         btn_cancel.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(),RVActivity.class);
+            Intent intent = new Intent(getApplicationContext(), RVActivity.class);
             startActivity(intent);
         });
 
@@ -71,7 +159,7 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
         btn_upd_veh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),RVActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RVActivity.class);
                 //todo que añada
                 executeCall(UpdVehiculo.this);
 
@@ -84,7 +172,20 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
     //CONEXION DB
     @Override
     public void doInBackground() {
-
+        switch (tipo){
+            case MOTOS:
+                mResult = Connector.getConector().put(Moto.class,moto, "/motos");
+                break;
+            case COCHE:
+                cResult = Connector.getConector().put(Coche.class,coche, "/coche");
+                break;
+            case PATIN:
+                pResult = Connector.getConector().put(Patinete.class,patinete, "/patin");
+                break;
+            case BICIS:
+                bResult = Connector.getConector().put(Bicicleta.class,bicicleta, "/bicis");
+                break;
+        }
     }
 
     @Override
@@ -95,7 +196,7 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
     /*MENU*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

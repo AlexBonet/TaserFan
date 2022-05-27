@@ -31,7 +31,7 @@ public class GestionPreferencias {
             gestionPreferencias = new GestionPreferencias();
         return gestionPreferencias;
     }
-//TODO preguntar a joaquin com fer pa set la ip y el puerto
+//TODO https://developer.android.com/training/data-storage/shared-preferences
     public String getIp(Context context){
         inicializa(context);
         return pref.getString("ip", API.Routes.IP);

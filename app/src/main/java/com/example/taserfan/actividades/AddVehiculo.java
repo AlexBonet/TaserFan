@@ -15,10 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.taserfan.API.Connector;
 import com.example.taserfan.API.Result;
 import com.example.taserfan.Model.Empleado;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
+import com.example.taserfan.actividades.vehiculos.Bicicleta;
+import com.example.taserfan.actividades.vehiculos.Coche;
+import com.example.taserfan.actividades.vehiculos.Moto;
+import com.example.taserfan.actividades.vehiculos.Patinete;
+import com.example.taserfan.actividades.vehiculos.TipoVehiculos;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
@@ -36,6 +42,17 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
      private Button btn_add_veh, btn_cancel;
      private String tipo;
      private Result<Vehiculo> result;
+
+    Result<Coche> cResult;
+    Result<Moto> mResult;
+    Result<Bicicleta> bResult;
+    Result<Patinete> pResult;
+
+    private TipoVehiculos tipoVehiculo;
+    private Coche coche;
+    private Moto moto;
+    private Patinete patinete;
+    private Bicicleta bicicleta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,17 +110,17 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
 
         /*SPINNER*/
         spinner = findViewById(R.id.spinner_tipos);
-        List<String> tipos=new ArrayList<>();
-            tipos.add("COCHE");
-            tipos.add("PATINETE");
-            tipos.add("MOTO");
-            tipos.add("BICICLETA");
-        ArrayAdapter<String> spinnerArray = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,tipos);
+        List<TipoVehiculos> tipos=new ArrayList<>();
+            tipos.add(TipoVehiculos.COCHE);
+            tipos.add(TipoVehiculos.MOTOS);
+            tipos.add(TipoVehiculos.BICIS);
+            tipos.add(TipoVehiculos.PATIN);
+        ArrayAdapter<TipoVehiculos> spinnerArray = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,tipos);
         spinner.setAdapter(spinnerArray);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override //TODO QUE CAMBIE EL NOM BOTON, podem posar un cancelar que torne a la RV
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               /* tipo= tipos.get(i);
+                tipoVehiculo= tipos.get(i);
 
                 if(tipo=="COCHE"){
                     lineaBici.setVisibility(View.GONE);
@@ -115,9 +132,16 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaPatin2.setVisibility(View.GONE);
                     btn_add_veh.setText("AÑADIR COCHE");
                     //(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet);
-                    Coche c = new Coche(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
-                            ,plazasCoche.getText().toString(),puertasCoche.getText().toString());
+                    coche = new Coche(matricula.getText().toString(),
+                            precio.getText().toString(),
+                            marca.getText().toString(),
+                            descripcion.getText().toString(),
+                            color.getText().toString(),
+                            bateria.getText().toString(),
+                            fecha.getText().toString(),
+                            estado.getText().toString(),
+                            carnet.getText().toString(),
+                            plazasCoche.getText().toString(),puertasCoche.getText().toString());
 
                 }else if(tipo=="PATINETE"){
                     lineaBici.setVisibility(View.GONE);
@@ -129,9 +153,17 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaPatin2.setVisibility(View.VISIBLE);
                     btn_add_veh.setText("AÑADIR PATINETE");
 
-                    Patinete p = new Patinete(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
-                            ,ruedasPatin.getText().toString(),tamanoPatin.getText().toString());
+                    patinete = new Patinete(matricula.getText().toString(),
+                            precio.getText().toString(),
+                            marca.getText().toString(),
+                            descripcion.getText().toString(),
+                            color.getText().toString(),
+                            bateria.getText().toString(),
+                            fecha.getText().toString(),
+                            estado.getText().toString(),
+                            carnet.getText().toString(),
+                            ruedasPatin.getText().toString(),tamanoPatin.getText().toString());
+
                 }else if(tipo=="MOTO"){
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -142,9 +174,18 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaPatin2.setVisibility(View.GONE);
                     btn_add_veh.setText("AÑADIR MOTO");
 
-                    Moto m = new Moto(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString()
-                            ,velocidadMoto.getText().toString(),cilindradaMoto.getText().toString());
+                    moto = new Moto(matricula.getText().toString(),
+                            precio.getText().toString(),
+                            marca.getText().toString(),
+                            descripcion.getText().toString(),
+                            color.getText().toString(),
+                            bateria.getText().toString(),
+                            fecha.getText().toString(),
+                            estado.getText().toString(),
+                            carnet.getText().toString(),
+                            velocidadMoto.getText().toString(),
+                            cilindradaMoto.getText().toString());
+
                 }else if(tipo=="BICICLETA"){
                     lineaBici.setVisibility(View.VISIBLE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -155,9 +196,17 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaPatin2.setVisibility(View.GONE);
                     btn_add_veh.setText("AÑADIR BICICLETA");
 
-                    Bicicleta b = new Bicicleta(matricula.getText().toString(),precio.getText().toString(),marca.getText().toString(),descripcion.getText().toString(),
-                    color.getText().toString(), bateria.getText().toString(),fecha.getText().toString(), estado.getText().toString(),carnet.getText().toString(),
+                    bicicleta = new Bicicleta(matricula.getText().toString(),
+                            precio.getText().toString(),
+                            marca.getText().toString(),
+                            descripcion.getText().toString(),
+                            color.getText().toString(),
+                            bateria.getText().toString(),
+                            fecha.getText().toString(),
+                            estado.getText().toString(),
+                            carnet.getText().toString(),
                             tipoBici.getText().toString());
+
                 }else {
                     lineaBici.setVisibility(View.GONE);
                     lineaCoche1.setVisibility(View.GONE);
@@ -166,7 +215,7 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
                     lineaMoto2.setVisibility(View.GONE);
                     lineaPatin1.setVisibility(View.GONE);
                     lineaPatin2.setVisibility(View.GONE);
-                }*/
+                }
             }
 
             @Override
@@ -180,7 +229,20 @@ public class AddVehiculo extends BaseActivity implements CallInterface {
     //CONEXION BD
     @Override
     public void doInBackground() {
-
+        switch (tipoVehiculo){
+            case MOTOS:
+                mResult = Connector.getConector().post(Moto.class,moto, "/motos");
+                break;
+            case COCHE:
+                cResult = Connector.getConector().post(Coche.class,coche, "/coche");
+                break;
+            case PATIN:
+                pResult = Connector.getConector().post(Patinete.class,patinete, "/patin");
+                break;
+            case BICIS:
+                bResult = Connector.getConector().post(Bicicleta.class,bicicleta, "/bicis");
+                break;
+        }
     }
 
     @Override
