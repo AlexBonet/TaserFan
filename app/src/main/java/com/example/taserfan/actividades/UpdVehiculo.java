@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.taserfan.API.Connector;
 import com.example.taserfan.API.Result;
@@ -80,7 +81,7 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
         tamanoPatin = findViewById(R.id.updTamano);
 
         tipo = (TipoVehiculos) getIntent().getExtras().getSerializable("tipo");
-//TODO POSAR ELS ESPECIFICS DE CADA UNO
+
         if (tipo == TipoVehiculos.COCHE) {
             coche = (Coche) getIntent().getExtras().getSerializable("co");
 
@@ -108,8 +109,8 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
             carnet.setHint(moto.getIdCarnet());
             bateria.setHint(moto.getBateria());
 
-            moto = new Moto(matricula.getText().toString(),
-                    precio.getText().toString(),
+            /*moto = new Moto(matricula.getText().toString(),
+                    Float.parseFloat(precio.getText().toString()),
                     marca.getText().toString(),
                     descripcion.getText().toString(),
                     color.getText().toString(),
@@ -119,7 +120,7 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
                     TipoVehiculos.MOTOS,
                     velocidadMoto.getText().toString(),
                     cilindradaMoto.getText().toString()
-            );
+            );*/
 
         } else if (tipo == TipoVehiculos.PATIN) {
             patinete = (Patinete)getIntent().getExtras().getSerializable("pa");
@@ -190,8 +191,68 @@ public class UpdVehiculo extends BaseActivity implements CallInterface {
 
     @Override
     public void doInUI() {
+        if(tipo==TipoVehiculos.COCHE){
+            coche = new Coche(matricula.getText().toString(),
+                    Float.parseFloat(precio.getText().toString()),
+                    marca.getText().toString(),
+                    descripcion.getText().toString(),
+                    color.getText().toString(),
+                    Integer.parseInt(bateria.getText().toString()),
+                    fecha.getText().toString(),
+                    estado.getText().toString(),
+                    carnet.getText().toString(),
+                    TipoVehiculos.COCHE,
+                    Integer.parseInt(plazasCoche.getText().toString()),
+                    Integer.parseInt(puertasCoche.getText().toString()));
 
+        }else if(tipo==TipoVehiculos.PATIN){
+            patinete = new Patinete(
+                    matricula.getText().toString(),
+                    Float.parseFloat(precio.getText().toString()),
+                    marca.getText().toString(),
+                    descripcion.getText().toString(),
+                    color.getText().toString(),
+                    Integer.parseInt(bateria.getText().toString()),
+                    fecha.getText().toString(),
+                    estado.getText().toString(),
+                    carnet.getText().toString(),
+                    TipoVehiculos.PATIN,
+                    Integer.parseInt(ruedasPatin.getText().toString()),
+                    Integer.parseInt(tamanoPatin.getText().toString()));
+
+        }else if(tipo==TipoVehiculos.MOTOS){
+            moto = new Moto(
+                    matricula.getText().toString(),
+                    Float.parseFloat(precio.getText().toString()),
+                    marca.getText().toString(),
+                    descripcion.getText().toString(),
+                    color.getText().toString(),
+                    Integer.parseInt(bateria.getText().toString()),
+                    fecha.getText().toString(),
+                    estado.getText().toString(),
+                    carnet.getText().toString(),
+                    TipoVehiculos.MOTOS,
+                    Integer.parseInt(velocidadMoto.getText().toString()),
+                    Integer.parseInt(cilindradaMoto.getText().toString()));
+
+        }else if(tipo==TipoVehiculos.BICIS){
+            bicicleta = new Bicicleta(
+                    matricula.getText().toString(),
+                    Float.parseFloat(precio.getText().toString()),
+                    marca.getText().toString(),
+                    descripcion.getText().toString(),
+                    color.getText().toString(),
+                    Integer.parseInt(bateria.getText().toString()),
+                    fecha.getText().toString(),
+                    estado.getText().toString(),
+                    carnet.getText().toString(),
+                    TipoVehiculos.BICIS,
+                    tipoBici.getText().toString());
+
+        }
+        Toast.makeText(this, tipo + " AÑADIDO", Toast.LENGTH_SHORT).show();
     }
+
 
     /*MENU*/
     @Override

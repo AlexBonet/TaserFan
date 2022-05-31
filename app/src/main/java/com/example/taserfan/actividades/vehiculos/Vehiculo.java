@@ -11,7 +11,7 @@ public class Vehiculo implements Serializable {
     private String descripcion;
     private String color;
     private int bateria;
-    private Date fechaAdq;
+    private String fechaAdq;
     private String estado;
     private String idCarnet;
     private Timestamp changeDts;
@@ -19,7 +19,7 @@ public class Vehiculo implements Serializable {
     private TipoVehiculos tipoVehiculo;
 
     public Vehiculo(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
-                    Date fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, TipoVehiculos tipoVehiculo) {
+                    String fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, TipoVehiculos tipoVehiculo) {
         this.matricula = matricula;
         this.precioHora = precioHora;
         this.marca = marca;
@@ -35,7 +35,7 @@ public class Vehiculo implements Serializable {
     }
 
     public Vehiculo(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
-                    Date fechaAdq, String estado, String idCarnet, TipoVehiculos tipoVehiculo) {
+                    String fechaAdq, String estado, String idCarnet, TipoVehiculos tipoVehiculo) {
         this.matricula = matricula;
         this.precioHora = precioHora;
         this.marca = marca;
@@ -99,11 +99,11 @@ public class Vehiculo implements Serializable {
         this.bateria = bateria;
     }
 
-    public Date getFechaAdq() {
+    public String getFechaAdq() {
         return fechaAdq;
     }
 
-    public void setFechaAdq(Date fechaAdq) {
+    public void setFechaAdq(String fechaAdq) {
         this.fechaAdq = fechaAdq;
     }
 
