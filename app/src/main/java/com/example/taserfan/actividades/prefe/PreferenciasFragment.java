@@ -51,17 +51,17 @@ public class PreferenciasFragment extends PreferenceFragmentCompat {
 
         //IP
         final EditTextPreference ip = findPreference("ip");
-        ip.setSummary("IP seleccionada: " + API.Routes.IP);
+        ip.setSummary("IP seleccionada: " + GestionPreferencias.getInstance().getIp(getContext()));
         ip.setOnPreferenceChangeListener((preference, newValue) -> {
-            ip.setSummary("IP seleccionada: " + API.Routes.IP);
+            ip.setSummary("IP seleccionada: " + newValue);
             return true;
         });
 
         //Puerto
         final EditTextPreference puerto = findPreference("puerto");
-        puerto.setSummary("PUERTO seleccionado: " + API.Routes.PUERTO);
+        puerto.setSummary("PUERTO seleccionado: " + GestionPreferencias.getInstance().getPuerto(getContext()));
         puerto.setOnPreferenceChangeListener((preference, newValue) -> {
-            puerto.setSummary("PUERTO seleccionado: " + API.Routes.PUERTO);
+            puerto.setSummary("PUERTO seleccionado: " + newValue);
             return true;
         });
     }

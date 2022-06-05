@@ -31,7 +31,6 @@ public class GestionPreferencias {
             gestionPreferencias = new GestionPreferencias();
         return gestionPreferencias;
     }
-//TODO https://developer.android.com/training/data-storage/shared-preferences
     public String getIp(Context context){
         inicializa(context);
         return pref.getString("ip", API.Routes.IP);

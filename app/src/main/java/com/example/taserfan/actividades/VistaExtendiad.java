@@ -65,6 +65,8 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             startActivity(intent);
         });
 
+        executeCall(this);
+
         /* Cancelar */
         back.setOnClickListener(view -> {
             intent = new Intent(getApplicationContext(),RVActivity.class);
@@ -151,7 +153,7 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
         }
     }
 
-    @Override //TODO ESTO ESTA MAL? FALTEN RESULTS
+    @Override
     public void doInUI() {
         if (tipo == TipoVehiculos.COCHE){
             coche = ((Result.Success<Coche>) cResult).getData();
@@ -165,12 +167,12 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             descripcion.setText(coche.getDescripcion());
             color.setText(coche.getColor());
             carnet.setText(coche.getIdCarnet());
-            bateria.setText(coche.getBateria());
-            puertasCoche.setText(coche.getNumPuertas());
-            plazasCoche.setText(coche.getNumPlazas());
+            bateria.setText(String.valueOf(coche.getBateria()));
+            puertasCoche.setText(String.valueOf(coche.getNumPuertas()));
+            plazasCoche.setText(String.valueOf(coche.getNumPlazas()));
 
         }else if (tipo == TipoVehiculos.MOTOS){
-            moto = ((Result.Success<Moto>) cResult).getData();
+            moto = ((Result.Success<Moto>) mResult).getData();
 
             img.setImageResource(R.drawable.ic_baseline_bike_scooter_24);
             matricula.setText(moto.getMatricula());
@@ -181,12 +183,12 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             descripcion.setText(moto.getDescripcion());
             color.setText(moto.getColor());
             carnet.setText(moto.getIdCarnet());
-            bateria.setText(moto.getBateria());
-            cilindradaMoto.setText(moto.getCilindrada());
-            velocidadMoto.setText(moto.getVelocidadMax());
+            bateria.setText(String.valueOf(moto.getBateria()));
+            cilindradaMoto.setText(String.valueOf(moto.getCilindrada()));
+            velocidadMoto.setText(String.valueOf(moto.getVelocidadMax()));
 
         }else if (tipo == TipoVehiculos.BICIS) {
-            bicicleta = ((Result.Success<Bicicleta>) cResult).getData();
+            bicicleta = ((Result.Success<Bicicleta>) bResult).getData();
 
             img.setImageResource(R.drawable.ic_baseline_pedal_bike_24);
             matricula.setText(bicicleta.getMatricula());
@@ -197,11 +199,11 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             descripcion.setText(bicicleta.getDescripcion());
             color.setText(bicicleta.getColor());
             carnet.setText(bicicleta.getIdCarnet());
-            bateria.setText(bicicleta.getBateria());
+            bateria.setText(String.valueOf(bicicleta.getBateria()));
             tipoBici.setText(bicicleta.getTipo());
 
         }else if (tipo == TipoVehiculos.PATIN) {
-            patinete = ((Result.Success<Patinete>) cResult).getData();
+            patinete = ((Result.Success<Patinete>) pResult).getData();
 
             img.setImageResource(R.drawable.ic_baseline_electric_scooter_24);
             matricula.setText(patinete.getMatricula());
@@ -212,9 +214,9 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
             descripcion.setText(patinete.getDescripcion());
             color.setText(patinete.getColor());
             carnet.setText(patinete.getIdCarnet());
-            bateria.setText(patinete.getBateria());
-            tamanoPatin.setText(patinete.getTamanyo());
-            ruedasPatin.setText(patinete.getNumRuedas());
+            bateria.setText(String.valueOf(patinete.getBateria()));
+            tamanoPatin.setText(String.valueOf(patinete.getTamanyo()));
+            ruedasPatin.setText(String.valueOf(patinete.getNumRuedas()));
         }
     }
 

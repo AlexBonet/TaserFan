@@ -1,5 +1,6 @@
 package com.example.taserfan.actividades;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,17 +42,14 @@ public class LoginActivity extends BaseActivity implements CallInterface {
             @Override
             public void onClick(View view) {
                 executeCall(LoginActivity.this);
-
             }
         });
-
     }
 
     @Override
     public void doInBackground() {
         ad = new AuthenticateData(mail.getText().toString(),pswd.getText().toString());
         result = Connector.getConector().post(Empleado.class,ad, API.Routes.AUTHENTICATE);
-
     }
 
     @Override
@@ -60,11 +58,23 @@ public class LoginActivity extends BaseActivity implements CallInterface {
         if (result instanceof Result.Success){
             LoggedInUserRepository.getInstance().login(((Result.Success<Empleado>) result).getData());
             intent = new Intent(getApplicationContext(), RVActivity.class);
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+            alert.setMessage("Se ha iniciado sesión correctamente")
+                    .setTitle("INICIAR SESIÓN")
+                    .setPositiveButton("Aceptar", null);
+            AlertDialog alertDialog = alert.create();
+            alertDialog.show();
+
             startActivity(intent);
-            Toast.makeText(this, "Log In", Toast.LENGTH_SHORT).show();
         }else {
             Result.Error resultado = (Result.Error) result;
-            Toast.makeText(this,  "F: " + resultado.getMessage(), Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+            alert.setMessage("Error: " + resultado.getCode() + "\n" + "- " + resultado.getMessage())
+                    .setTitle("ERROR AL INICIAR SESIÓN")
+                    .setPositiveButton("Aceptar", null);
+            AlertDialog alertDialog = alert.create();
+            alertDialog.show();
         }
     }
 
