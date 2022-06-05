@@ -64,7 +64,7 @@ public class LoginActivity extends BaseActivity implements CallInterface {
             Toast.makeText(this, "Log In", Toast.LENGTH_SHORT).show();
         }else {
             Result.Error resultado = (Result.Error) result;
-            Toast.makeText(this,  resultado.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  "F: " + resultado.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

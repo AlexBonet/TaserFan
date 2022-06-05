@@ -1,5 +1,6 @@
 package com.example.taserfan.actividades;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +20,10 @@ import com.example.taserfan.API.Connector;
 import com.example.taserfan.API.Result;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
+import com.example.taserfan.actividades.vehiculos.Bicicleta;
+import com.example.taserfan.actividades.vehiculos.Coche;
+import com.example.taserfan.actividades.vehiculos.Moto;
+import com.example.taserfan.actividades.vehiculos.Patinete;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
@@ -31,11 +36,13 @@ import java.util.List;
 public class RVActivity extends BaseActivity implements CallInterface, View.OnClickListener {
 
     private RecyclerView recyclerView;
+    private RVAdapter myRVAdapter;
     private RadioGroup rd;
     private RadioButton todos,coche,patin,bicis,motos;
     private EditText editText;
     private ImageButton btnAdd;
     private List<Vehiculo> vehiculoList;
+    private Result result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,20 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
         bicis = findViewById(R.id.rbbicis);
         motos = findViewById(R.id.rbmotos);
 
+        /*radio group*/
+        rd.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(RVActivity.this);
+                alert.setMessage("Esta función aún no está disponible. ")
+                        .setTitle("Ups...")
+                        .setPositiveButton("Aceptar",null);
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+            }
+        });
+
+        /*boton añadir*/
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +80,8 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
                 startActivity(intent);
             }
         });
+
+        /*llamada para obtener la lista*/
         executeCall(this);
     }
 
@@ -69,7 +92,8 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
     @Override
     public void doInUI() {
-        RVAdapter myRVAdapter = new RVAdapter(getApplicationContext(), vehiculoList);
+        /*Recycler View*/
+        myRVAdapter = new RVAdapter(getApplicationContext(), vehiculoList);
         myRVAdapter.setOnClickListener(this);
         recyclerView.setAdapter(myRVAdapter);
 
@@ -79,12 +103,10 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
         /*DESLIZAR PARA ELIMINAR*/
         ItemTouchHelper mIth = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                     @Override
                     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                        // move item in `fromPos` to `toPos` in adapter.
-                        recyclerView.getAdapter().notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                        return true;// true if moved, false otherwise
+                        return false;// true if moved, false otherwise
                     }
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
@@ -96,33 +118,44 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
                         executeCall(new CallInterface() {
                             @Override
                             public void doInBackground() {
-                                Connector.getConector().delete(Vehiculo.class, "/coche?matricula="+vehiculo.getMatricula());
+                                switch (vehiculo.getTipoVehiculo()) {
+                                    case MOTOS:
+                                        result = Connector.getConector().delete(Vehiculo.class, "/motos?matricula="+vehiculo.getMatricula());
+                                        break;
+                                    case COCHE:
+                                        result = Connector.getConector().delete(Vehiculo.class, "/coche?matricula="+vehiculo.getMatricula());
+                                        break;
+                                    case PATIN:
+                                        result = Connector.getConector().delete(Vehiculo.class, "/patin?matricula="+vehiculo.getMatricula());
+                                        break;
+                                    case BICIS:
+                                        result = Connector.getConector().delete(Vehiculo.class, "/bicis?matricula="+vehiculo.getMatricula());
+                                        break;
+                                }
                             }
 
                             @Override
                             public void doInUI() {
-
+                                if (result instanceof Result.Success){
+                                    AlertDialog.Builder alert = new AlertDialog.Builder(RVActivity.this);
+                                    alert.setMessage("Vehiculo eliminado con existo")
+                                            .setTitle("ELIMINADO")
+                                            .setPositiveButton("Aceptar",null);
+                                    AlertDialog alertDialog = alert.create();
+                                    alertDialog.show();
+                                }else {
+                                    Result.Error error=(Result.Error)result;
+                                    AlertDialog.Builder alert = new AlertDialog.Builder(RVActivity.this);
+                                    alert.setMessage("Error: " + error.getCode() + "\n" + " : - " + error.getMessage())
+                                            .setTitle("ERROR ELIMINANDO")
+                                            .setPositiveButton("Aceptar",null);
+                                    AlertDialog alertDialog = alert.create();
+                                    alertDialog.show();
+                                }
+                                vehiculoList.remove(position);
+                                myRVAdapter.notifyItemRemoved(position);
                             }
                         });
-
-                        Snackbar.make(recyclerView, "Deleted " + vehiculo.getMatricula(), Snackbar.LENGTH_LONG)
-                                .setAction("Undo", v -> {
-                                    vehiculoList.add(position, vehiculo);
-                                    myRVAdapter.notifyItemInserted(position);
-
-                                    executeCall(new CallInterface() {
-                                        @Override
-                                        public void doInBackground() {
-
-                                        }
-
-                                        @Override
-                                        public void doInUI() {
-
-                                        }
-                                    });
-
-                                }).show();
                     }
                 });
         mIth.attachToRecyclerView(recyclerView);

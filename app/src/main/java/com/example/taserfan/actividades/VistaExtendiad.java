@@ -34,10 +34,10 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
     private LinearLayout lineaBici, lineaMoto1, lineaMoto2, lineaPatin1, lineaPatin2, lineaCoche1, lineaCoche2;
     private ImageView img;
 
-    Result<Coche> cResult;
-    Result<Moto> mResult;
-    Result<Bicicleta> bResult;
-    Result<Patinete> pResult;
+    private Result<Coche> cResult;
+    private Result<Moto> mResult;
+    private Result<Bicicleta> bResult;
+    private Result<Patinete> pResult;
 
     private String v_matricula;
     private TipoVehiculos tipo;
@@ -57,22 +57,15 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
         edit = findViewById(R.id.btnEdit);
         back = findViewById(R.id.btnBack);
 
+        /* Editar vehiculo */
         edit.setOnClickListener(view -> {
             intent = new Intent(getApplicationContext(),UpdVehiculo.class);
             intent.putExtra("tipo",tipo);
-
-            if (tipo == TipoVehiculos.COCHE)
-                intent.putExtra("co",coche);
-            else if (tipo == TipoVehiculos.MOTOS)
-                intent.putExtra("mo",moto);
-            else if (tipo == TipoVehiculos.PATIN)
-                intent.putExtra("pa",patinete);
-            else if (tipo == TipoVehiculos.BICIS)
-                intent.putExtra("bi",bicicleta);
-
+            intent.putExtra("matr",v_matricula);
             startActivity(intent);
         });
 
+        /* Cancelar */
         back.setOnClickListener(view -> {
             intent = new Intent(getApplicationContext(),RVActivity.class);
             startActivity(intent);
@@ -86,6 +79,7 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
         lineaPatin1 = findViewById(R.id.linExtRuedasP);
         lineaPatin2 = findViewById(R.id.lineaExtTamP);
 
+        /* Mostrar algunas lineas */
         if (tipo == TipoVehiculos.COCHE){
             lineaBici.setVisibility(View.GONE);
             lineaCoche1.setVisibility(View.VISIBLE);
@@ -136,7 +130,6 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
         tipoBici = findViewById(R.id.biciExt);
         ruedasPatin = findViewById(R.id.ruedasExtP);
         tamanoPatin = findViewById(R.id.tamanoExtP);
-
         img = findViewById(R.id.imgVehExt);
     }
 
@@ -158,7 +151,7 @@ public class VistaExtendiad<T> extends BaseActivity implements CallInterface {
         }
     }
 
-    @Override
+    @Override //TODO ESTO ESTA MAL? FALTEN RESULTS
     public void doInUI() {
         if (tipo == TipoVehiculos.COCHE){
             coche = ((Result.Success<Coche>) cResult).getData();
