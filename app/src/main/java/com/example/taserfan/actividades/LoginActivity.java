@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -28,11 +27,14 @@ public class LoginActivity extends BaseActivity implements CallInterface {
     private EditText pswd;
     private Button button;
     private AuthenticateData ad;
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        alert = new AlertDialog.Builder(LoginActivity.this);
 
         mail = findViewById(R.id.username);
         pswd = findViewById(R.id.password);
@@ -59,7 +61,6 @@ public class LoginActivity extends BaseActivity implements CallInterface {
             LoggedInUserRepository.getInstance().login(((Result.Success<Empleado>) result).getData());
             intent = new Intent(getApplicationContext(), RVActivity.class);
 
-            AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
             alert.setMessage("Se ha iniciado sesión correctamente")
                     .setTitle("INICIAR SESIÓN")
                     .setPositiveButton("Aceptar", null);
@@ -69,12 +70,7 @@ public class LoginActivity extends BaseActivity implements CallInterface {
             startActivity(intent);
         }else {
             Result.Error resultado = (Result.Error) result;
-            AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
-            alert.setMessage("Error: " + resultado.getCode() + "\n" + "- " + resultado.getMessage())
-                    .setTitle("ERROR AL INICIAR SESIÓN")
-                    .setPositiveButton("Aceptar", null);
-            AlertDialog alertDialog = alert.create();
-            alertDialog.show();
+            Tools.alertError(alert,resultado,"ERROR AL INICIAR SESIÓN");
         }
     }
 

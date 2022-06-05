@@ -20,14 +20,9 @@ import com.example.taserfan.API.Connector;
 import com.example.taserfan.API.Result;
 import com.example.taserfan.R;
 import com.example.taserfan.actividades.prefe.PreferenciasActivity;
-import com.example.taserfan.actividades.vehiculos.Bicicleta;
-import com.example.taserfan.actividades.vehiculos.Coche;
-import com.example.taserfan.actividades.vehiculos.Moto;
-import com.example.taserfan.actividades.vehiculos.Patinete;
 import com.example.taserfan.actividades.vehiculos.Vehiculo;
 import com.example.taserfan.base.BaseActivity;
 import com.example.taserfan.base.CallInterface;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +34,6 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
     private RVAdapter myRVAdapter;
     private RadioGroup rd;
     private RadioButton todos,coche,patin,bicis,motos;
-    private EditText editText;
     private ImageButton btnAdd;
     private List<Vehiculo> vehiculoList;
     private Result result;
@@ -51,7 +45,6 @@ public class RVActivity extends BaseActivity implements CallInterface, View.OnCl
 
         recyclerView = findViewById(R.id.recyclerV);
         rd = findViewById(R.id.radioGroup);
-        editText = findViewById(R.id.filtro);
         btnAdd = findViewById(R.id.btnAdd);
         todos = findViewById(R.id.rbtodos);
         coche = findViewById(R.id.rbcoche);

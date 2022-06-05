@@ -33,7 +33,7 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter  .ViewHolder> {
         view.setOnClickListener(onClickListener);
         return new RVAdapter.ViewHolder(view);    }
 
-    @Override //todo no va bé
+    @Override
     public void onBindViewHolder(@NonNull RVAdapter.ViewHolder holder, int position) {
         Vehiculo v = list.get(position);
 

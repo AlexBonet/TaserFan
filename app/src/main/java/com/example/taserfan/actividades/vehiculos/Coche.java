@@ -2,7 +2,6 @@ package com.example.taserfan.actividades.vehiculos;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.sql.Date;
 
 public class Coche extends Vehiculo implements Serializable {
     private int numPlazas;
@@ -11,11 +10,6 @@ public class Coche extends Vehiculo implements Serializable {
     public Coche(String matricula, float precioHora, String marca, String descripcion, String color, int bateria,
                  String fechaAdq, String estado, String idCarnet, Timestamp changeDts, String changeBy, TipoVehiculos tipoVehiculo, int numPlazas, int numPuertas) {
         super(matricula, precioHora, marca, descripcion, color, bateria, fechaAdq, estado, idCarnet, changeDts, changeBy, tipoVehiculo);
-        this.numPlazas = numPlazas;
-        this.numPuertas = numPuertas;
-    }
-
-    public Coche(int numPlazas, int numPuertas) {
         this.numPlazas = numPlazas;
         this.numPuertas = numPuertas;
     }

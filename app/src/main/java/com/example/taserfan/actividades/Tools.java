@@ -24,7 +24,7 @@ public class Tools {
      * @param error Result error que recibimos del connector
      */
     public static void alertError(AlertDialog.Builder alert, Result.Error error, String msg){
-        alert.setMessage("Error: " + error.getCode() + "\n" + " : - " + error.getMessage())
+        alert.setMessage("Error: " + error.getCode() + "\n" + "- " + error.getMessage())
                 .setTitle("ERROR " + msg)
                 .setPositiveButton("Aceptar", null);
         AlertDialog alertDialog = alert.create();
