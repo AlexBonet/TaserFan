@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
-//TODO llamada que pase info
 public class AddVehiculo extends BaseActivity{
     private LinearLayout lineaBici, lineaMoto1, lineaMoto2, lineaPatin1, lineaPatin2, lineaCoche1, lineaCoche2;
     private EditText matricula, marca, fecha, estado, precio, descripcion, color, carnet, bateria,
